@@ -40,8 +40,6 @@ Emotions-Classification/
 │   └── TransformerWithROPE/
 ├── Saved trained model/
 ├── Data Preprocessing.ipynb
-├── softmax regression.ipynb
-├── transformer-encoder-classification.ipynb
 ├── requirements.txt
 └── README.md
 ```
@@ -50,10 +48,16 @@ Emotions-Classification/
 
 The project implements several models with increasing complexity:
 
-1. **Softmax Regression**: Basic classification model using GPU acceleration
-2. **Decision Tree**: Traditional machine learning model for classification
-3. **Transformer Encoder**: Advanced deep learning model based on the transformer architecture
-4. **Transformer with ROPE (Rotary Position Embedding)**: Enhanced transformer model with improved position encoding
+1. **Traditional Machine Learning**:
+   - **Linear Support Vector Classification (LinearSVC)**: A discriminative classifier that finds the hyperplane that best separates emotions with maximum margin.
+   - **Logistic Regression**: A probabilistic model that uses a logistic function to model the probability of an emotion class.
+   - **Random Forest**: An ensemble learning method that constructs multiple decision trees and outputs the mode of the classes.
+   - **Multinomial Naive Bayes**: A probabilistic classifier based on Bayes' theorem with naive independence assumptions between features.
+   - **Decision Tree**: A tree-like model that predicts emotions by learning simple decision rules from the data.
+
+2. **Neural Network Models**:
+   - **Transformer Encoder**: A self-attention based architecture that captures contextual relationships in text without recurrence.
+   - **Transformer with ROPE (Rotary Position Embedding)**: Enhanced transformer model that uses rotary position embeddings for improved representation of sequential information.
 
 ## 🚀 Getting Started
 
@@ -82,7 +86,7 @@ pip install -r requirements.txt
    - Run `Data Preprocessing.ipynb` to process raw data
 
 2. **Training Models**:
-   - For softmax regression: `softmax regression.ipynb`
+   - For traditional ML models: `Model/MLModel/MachineLearning.ipynb`
    - For transformer models: See notebooks in Model/ directory
 
 3. **Making Predictions**:
@@ -93,20 +97,30 @@ pip install -r requirements.txt
 
 Performance metrics for different models on the test set:
 
-| Model | Accuracy | F1 Score | Training Time |
-|-------|----------|----------|---------------|
-| Softmax Regression | ~70% | ~0.68 | Fast |
-| Decision Tree | ~65% | ~0.62 | Very Fast |
-| Transformer Encoder | ~78% | ~0.76 | Slow |
-| Transformer with ROPE | ~82% | ~0.80 | Slow |
+### Traditional Machine Learning Models
+
+| Model | Accuracy | Description |
+|-------|----------|-------------|
+| LinearSVC | 82.21% | Achieves highest accuracy among traditional models with effective linear separation |
+| Logistic Regression | 80.43% | Strong performance with probabilistic output and good interpretability |
+| Random Forest | 74.70% | Robust ensemble method that handles non-linear relationships |
+| Multinomial Naive Bayes | 72.53% | Efficient model that works well with text classification tasks |
+| Decision Tree | 70.55% | Simple, interpretable model with decent performance |
+
+### Deep Learning Models
+
+| Model | Accuracy | Training Time | Description |
+|-------|----------|---------------|-------------|
+| Transformer with ROPE | ~85% | Slow | State-of-the-art model with superior contextual understanding |
+| Transformer Encoder | ~78% | Slow | Powerful self-attention mechanism for capturing text relationships |
 
 ## 🔮 Future Work
 
 - [ ] Implement additional models (BERT, RoBERTa, etc.)
    - [ ] Simple RNN, GRU, LSTM 
    - [ ] Pretrained model BERT, RoBERTa, DeBERTa
--[ ] Add cross-validation for hyperparameter tuning
--[ ] Create a web demo for real-time emotion prediction with optional model choice
+- [ ] Add cross-validation for hyperparameter tuning
+- [ ] Create a web demo for real-time emotion prediction with optional model choice
 
 ## 📚 References
 
