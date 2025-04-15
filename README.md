@@ -101,11 +101,11 @@ Performance metrics for different models on the test set:
 
 | Model | Accuracy | Description |
 |-------|----------|-------------|
-| LinearSVC | 82.21% | Achieves highest accuracy among traditional models with effective linear separation |
-| Logistic Regression | 80.43% | Strong performance with probabilistic output and good interpretability |
-| Random Forest | 74.70% | Robust ensemble method that handles non-linear relationships |
-| Multinomial Naive Bayes | 72.53% | Efficient model that works well with text classification tasks |
-| Decision Tree | 70.55% | Simple, interpretable model with decent performance |
+| LinearSVC | 90.34% | Achieves highest accuracy among traditional models with effective linear separation |
+| Logistic Regression | 89.97% | Strong performance with probabilistic output and good interpretability |
+| Random Forest | 87.10% | Robust ensemble method that handles non-linear relationships |
+| Multinomial Naive Bayes | 88.38% | Efficient model that works well with text classification tasks |
+| Decision Tree | 83.88% | Simple, interpretable model with decent performance |
 
 ### Deep Learning Models
 
