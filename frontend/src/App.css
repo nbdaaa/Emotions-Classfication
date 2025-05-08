@@ -1,0 +1,116 @@
+/* App.css */
+body {
+  margin: 0;
+  font-family: Arial, sans-serif;
+  background-color: #f8f8f8;
+}
+
+.app {
+  text-align: center;
+  color: #333;
+  height: 100vh;
+  width: 100vw;
+}
+
+.navbar {
+  display: flex;
+  align-items: center;
+  background-color: white;
+  padding: 10px 20px;
+  box-shadow: 0 2px 5px rgba(0, 0, 0, 0.1);
+}
+
+.logo {
+  height: 40px;
+  margin-right: auto;
+}
+
+.header {
+  background-color: #ff4d4d;
+  color: white;
+  padding: 30px;
+  position: relative;
+  overflow: hidden;
+  background-image: url('background.png');
+  background-size: cover;
+  background-position: center;
+  background-blend-mode: overlay;
+  height: 30%;
+
+
+  display: flex;
+  justify-content: center;
+  align-items: center;
+}
+
+.header h1 {
+  margin: 0;
+  font-size: 4rem;
+  text-shadow: 2px 2px 4px rgba(0, 0, 0, 0.3);
+  transition: transform 0.3s ease;
+}
+
+
+.header:hover h1 {
+  transform: translateY(-5px);
+}
+
+.content {
+  display: flex;
+  justify-content: space-between;
+  padding: 20px;
+  max-width: 1200px;
+  height: 45%;
+  margin: 0 auto;
+}
+
+.input-section {
+  width: 60%;
+}
+
+textarea {
+  width: 100%;
+  height: 80%;
+  padding: 15px;
+  border: 1px solid #ccc;
+  border-radius: 5px;
+  resize: none;
+  box-sizing: border-box;
+  font-size: 1rem;
+}
+
+button {
+  margin-top: 15px;
+  padding: 12px 25px;
+  background-color: #ff4d4d;
+  color: white;
+  border: none;
+  border-radius: 5px;
+  cursor: pointer;
+  font-size: 1rem;
+  transition: background-color 0.3s;
+}
+
+button:hover {
+  background-color: #e60000;
+}
+
+.output-section {
+  width: 30%;
+  text-align: left;
+  background-color: white;
+  padding: 20px;
+  border-radius: 5px;
+  box-shadow: 0 2px 8px rgba(0, 0, 0, 0.1);
+}
+
+.output-section h2 {
+  margin: 0 0 15px 0;
+  color: #ff4d4d;
+}
+
+.output-section p {
+  font-size: 1.2rem;
+  color: #555;
+  font-weight: bold;
+}
