@@ -2,6 +2,7 @@
 import React, { useState } from "react";
 import "./App.css";
 import RiveAnimation from "./RiveAnimation";
+import Swal from "sweetalert2";
 import logoImage from "./logo.png"; // Cần thêm file logo vào project
 
 function App() {
@@ -12,7 +13,19 @@ function App() {
     const [history, setHistory] = useState([]);
 
     const handleAnalyze = async () => {
-        if (!text.trim()) return;
+        if (!text.trim()) {
+            Swal.fire({
+                title: "Oops...",
+                text: "Please enter some text to analyze!",
+                icon: "warning",
+                confirmButtonColor: "#007bff",
+                background: "#fff",
+                customClass: {
+                    popup: "animated fadeInDown",
+                },
+            });
+            return;
+        }
 
         setIsLoading(true);
         try {
