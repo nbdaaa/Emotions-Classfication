@@ -1,0 +1,160 @@
+/* App.css */
+body {
+    margin: 0;
+    font-family: Arial, sans-serif;
+}
+
+.app {
+    min-height: 100vh;
+    background-image: url("./background.png");
+    background-size: cover;
+    background-position: center;
+    background-repeat: no-repeat;
+    display: grid;
+    grid-template-columns: 300px 1fr;
+    position: relative;
+}
+
+.app-title {
+    position: absolute;
+    top: 20px;
+    right: 20px;
+    color: rgb(201, 85, 85);
+    font-size: 1.2rem;
+    text-shadow: 2px 2px 4px rgba(0, 0, 0, 0.5);
+}
+
+.model-selection {
+    position: relative;
+    display: flex;
+    flex-direction: row;
+    gap: 30px;
+    width: 100%; /* Đảm bảo có chiều rộng rõ ràng */
+}
+
+.analyze-button {
+    position: relative;
+    background-color: #007bff;
+    color: white;
+    border: none;
+    border-radius: 4px;
+    cursor: pointer;
+    width: 30%; /* Chiếm 30% chiều rộng của model-selection */
+    padding: 0.8rem 1rem;
+}
+
+.history-section {
+    background-color: rgba(255, 255, 255, 0.9);
+    padding: 20px;
+    height: 100vh;
+    overflow-y: auto;
+    border-right: 1px solid rgba(0, 0, 0, 0.1);
+}
+
+.history-section h2 {
+    margin-top: 0;
+    color: #333;
+    font-size: 1.2rem;
+}
+
+.history-item {
+    background-color: white;
+    padding: 10px;
+    margin-bottom: 10px;
+    border-radius: 4px;
+    box-shadow: 0 1px 3px rgba(0, 0, 0, 0.1);
+}
+
+.main-content {
+    display: grid;
+    grid-template-columns: 1.5fr 0.5fr;
+    gap: 40px;
+    padding: 20px;
+    align-items: center;
+    height: 100vh;
+}
+
+.input-section {
+    background-color: rgba(255, 255, 255, 0.9);
+    padding: 20px 20px 20px 20px;
+    border-radius: 8px;
+    box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1);
+    box-sizing: border-box;
+    height: 76%;
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    gap: 1rem;
+}
+
+.input-section textarea {
+    width: 100%;
+    height: 80%;
+    padding: 1rem;
+    border: 1px solid #ddd;
+    border-radius: 4px;
+    resize: vertical;
+    background-color: white;
+    box-sizing: border-box;
+}
+
+.input-section button {
+    padding: 0.8rem 1.5rem;
+    background-color: #007bff;
+    color: white;
+    border: none;
+    border-radius: 4px;
+    cursor: pointer;
+    transition: background-color 0.3s;
+    width: 100%;
+    margin: 0;
+}
+
+.input-section button:hover {
+    background-color: #0056b3;
+}
+
+.input-section button:disabled {
+    background-color: #cccccc;
+    cursor: not-allowed;
+}
+
+.animation-container {
+    background-color: rgba(255, 255, 255, 0.9);
+    padding: 20px;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    gap: 0px;
+    border-radius: 8px;
+    box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1);
+}
+
+.animation-section {
+    background-color: none;
+    border-radius: 8px;
+    width: 100%;
+    height: 70%;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+}
+
+.emotion-display {
+    padding: 20px;
+    text-align: center;
+    width: 100%;
+}
+
+.emotion-display h2 {
+    margin: 0;
+    color: #333;
+    font-size: 1.2rem;
+}
+
+.emotion-display p {
+    margin: 10px 0 0;
+    font-size: 1.5rem;
+    color: #007bff;
+    font-weight: bold;
+}
