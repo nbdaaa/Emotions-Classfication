@@ -1,79 +1,73 @@
-// App.js
 import React, { useState } from "react";
 import "./App.css";
 import RiveAnimation from "./RiveAnimation";
-import Swal from "sweetalert2";
-import logoImage from "./logo.png"; // Cần thêm file logo vào project
 
 function App() {
-    const [text, setText] = useState("");
+    const [sentence, setSentence] = useState("");
+    const [error, setError] = useState("");
+    const [selectedModel, setSelectedModel] = useState("logistic");
     const [riveEmotion, setRiveEmotion] = useState("Idle");
     const [emotionClassify, setEmotionClassify] = useState("");
     const [isLoading, setIsLoading] = useState(false);
     const [history, setHistory] = useState([]);
 
+    const models = [
+        { id: "logistic", name: "Logistic Regression" },
+        { id: "decision_tree", name: "Decision Tree" },
+        { id: "linear_svc", name: "Linear SVC" },
+        { id: "multinomial_nb", name: "Multinomial Naive Bayes" },
+        { id: "transformer", name: "Transformer" },
+        { id: "transformer_rope", name: "Transformer with ROPE" },
+    ];
+
+    // Chuyển handleAnalyze thành hàm gửi request
     const handleAnalyze = async () => {
-        if (!text.trim()) {
-            Swal.fire({
-                title: "Oops...",
-                text: "Please enter some text to analyze!",
-                icon: "warning",
-                confirmButtonColor: "#007bff",
-                background: "#fff",
-                customClass: {
-                    popup: "animated fadeInDown",
-                },
-            });
+        if (!sentence.trim()) {
+            setError("Please enter some text to analyze.");
             return;
         }
 
         setIsLoading(true);
+        setError("");
+        setRiveEmotion("Idle");
+        setEmotionClassify("");
+
         try {
-            // const response = await fetch("http://localhost:5000/predict", {
-            //     method: "POST",
-            //     headers: {
-            //         "Content-Type": "application/json",
-            //     },
-            //     body: JSON.stringify({ text: text }),
-            // });
+            console.log("Sending request to backend...");
+            const response = await fetch("http://localhost:5000/predict", {
+                method: "POST",
+                headers: { "Content-Type": "application/json" },
+                body: JSON.stringify({ sentence, model: selectedModel }),
+            });
 
-            // const data = await response.json();
+            const data = await response.json();
+            console.log("Received response from backend:", data);
+            if (!response.ok) {
+                throw new Error(data.error || "Something went wrong");
+            }
 
-            console.log("Change emotions");
-            const emotions = ["Joy", "Sadness", "Anger", "Fear", "Love", "Suprise"];
-            const randomEmotion = emotions[Math.floor(Math.random() * emotions.length)];
-            // Chuyển đổi cảm xúc từ backend sang tên animation tương ứng
-            const emotionMap = {
-                Joy: "happy",
-                Sadness: "sad",
-                Anger: "Angry",
-                Fear: "stressed",
-                Suprise: "excited",
-                Love: "whistling",
-            };
+            setRiveEmotion(data.emotion);
+            setEmotionClassify(data.emotion);
 
-            const newEmotion = emotionMap[randomEmotion];
-            setEmotionClassify(randomEmotion);
-            setRiveEmotion(newEmotion);
-
-            // Add to history
             setHistory((prev) =>
                 [
                     {
-                        text: text,
-                        emotion: randomEmotion,
+                        text: sentence,
+                        emotion: data.emotion,
                         timestamp: new Date().toLocaleTimeString(),
                     },
                     ...prev,
                 ].slice(0, 10)
-            ); // Keep last 10 items
-        } catch (error) {
-            console.error("Error:", error);
+            );
+        } catch (err) {
+            setError(err.message);
             setRiveEmotion("Idle");
         } finally {
             setIsLoading(false);
         }
     };
+
+    // Bỏ handleSubmit vì form chỉ chứa select, không submit gì
 
     return (
         <div className="app">
@@ -98,10 +92,25 @@ function App() {
 
             <div className="main-content">
                 <div className="input-section">
-                    <textarea placeholder="Enter your text here..." value={text} onChange={(e) => setText(e.target.value)} />
-                    <button onClick={handleAnalyze} disabled={isLoading}>
-                        {isLoading ? "Analyzing..." : "Start analyzing"}
-                    </button>
+                    <textarea placeholder="Enter your text here..." value={sentence} onChange={(e) => setSentence(e.target.value)} />
+                    <div className="model-selection">
+                        <button className="analyze-button" onClick={handleAnalyze} disabled={isLoading}>
+                            {isLoading ? "Analyzing..." : "Start analyzing"}
+                        </button>
+                        <form className="input-form" onSubmit={(e) => e.preventDefault()}>
+                            <div className="model-selector">
+                                <label htmlFor="model">Select Model:</label>
+                                <select id="model" value={selectedModel} onChange={(e) => setSelectedModel(e.target.value)} className="model-select">
+                                    {models.map((model) => (
+                                        <option key={model.id} value={model.id}>
+                                            {model.name}
+                                        </option>
+                                    ))}
+                                </select>
+                            </div>
+                        </form>
+                    </div>
+                    {error && <p className="error-message">{error}</p>}
                 </div>
 
                 <div className="animation-container">
@@ -110,7 +119,7 @@ function App() {
                     </div>
                     <div className="emotion-display">
                         <h2>Detected Emotion</h2>
-                        <p>{emotionClassify}</p>
+                        <p>{emotionClassify || "N/A"}</p>
                     </div>
                 </div>
             </div>

@@ -6,6 +6,16 @@ function RiveAnimation({ emotion }) {
     const riveRef = useRef(null);
     const dpr = window.devicePixelRatio || 1;
 
+    const mappingEmotion = {
+        "anger": "Angry",
+        "fear": "stressed",
+        "joy": "happy",
+        "love": "whistling",
+        "sadness": "sad",
+        "surprise": "excited",
+        "Idle": "Idle",
+    };
+
     useEffect(() => {
         async function loadRive() {
             try {
@@ -42,16 +52,17 @@ function RiveAnimation({ emotion }) {
     // Xử lý khi emotion thay đổi
     useEffect(() => {
         if (riveRef.current && emotion) {
+            const emotionMapping = mappingEmotion[emotion];
             const validEmotions = ["happy", "sad", "excited", "Angry", "Idle", "whistling", "stressed"];
-            if (validEmotions.includes(emotion)) {
+            if (validEmotions.includes(emotionMapping)) {
                 console.log("Playing emotion:", emotion);
                 riveRef.current.stop();
                 riveRef.current.play("Idle");
-                riveRef.current.play(emotion);
+                riveRef.current.play(emotionMapping);
 
                 const interval = setInterval(() => {
                     riveRef.current.stop();
-                    riveRef.current.play(emotion);
+                    riveRef.current.play(emotionMapping);
                 }, 3000);
 
                 return () => clearInterval(interval);
